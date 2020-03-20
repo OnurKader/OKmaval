@@ -9,10 +9,11 @@ REBUILDABLES = $(OBJS) $(LINK_TARGET)
 
 .PHONY: all clean test
 
-clean:
-	@rm -f $(REBUILDABLES)
-
 all: $(LINK_TARGET)
+
+clean:
+	@echo Deleting $(REBUILDABLES)
+	@rm -f $(REBUILDABLES)
 
 $(LINK_TARGET) : $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(CLIBS)
@@ -21,4 +22,4 @@ $(LINK_TARGET) : $(OBJS)
 	g++ -g -o $@ -c $< $(CFLAGS) $(CLIBS)
 
 Maval.o : Maval.hpp
-test.o : test.hpp Maval.hpp
+test.o : Maval.hpp
