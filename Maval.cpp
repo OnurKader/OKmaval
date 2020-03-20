@@ -2,11 +2,22 @@
 
 namespace OK
 {
-Maval::Maval()
+Expression::Expression(Operator op, double val) : m_operator(op), m_rhs(val) {}
+
+Expression::~Expression() {}
+
+UnaryExpression::UnaryExpression(Operator op, double val) : Expression(op, val) {}
+
+UnaryExpression::~UnaryExpression() {}
+
+BinaryExpression::BinaryExpression(Operator op, double lhs, double rhs) :
+	Expression(op, rhs), m_lhs(lhs)
 {
 }
 
-Maval::~Maval()
-{
-}
+BinaryExpression::~BinaryExpression() {}
+
+Maval::Maval() {}
+
+Maval::~Maval() {}
 }	 // namespace OK
