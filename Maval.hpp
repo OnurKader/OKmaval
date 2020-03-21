@@ -1,13 +1,16 @@
 #pragma once
 
+#include "Token.hpp"
+
 #include <cfloat>
 #include <climits>
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
 #include <limits>
-#include <stack>
-#include <string>
+#include <vector>
+
+// TODO Add Mathematical and Physical Constants
 
 namespace OK
 {
@@ -93,6 +96,15 @@ class BinaryExpression : public Expression
 
 	private:
 	double m_lhs;
+};
+
+class ExpressionTree
+{
+	public:
+	ExpressionTree();
+	~ExpressionTree();
+
+	private:
 };
 
 class Maval

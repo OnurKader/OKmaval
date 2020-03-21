@@ -2,9 +2,12 @@
 *.creator
 *.files
 *.includes
+*.cxxflags
+*.pro
 *.user
 .*/
 *.o
 tags
 test
+compile_commands.json
 

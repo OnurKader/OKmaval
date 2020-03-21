@@ -1,9 +1,11 @@
 CC=g++
-CFLAGS=-g -std=c++2a -Wall -Wextra -Wpedantic -Wshadow
+CFLAGS=-g -std=c++17 -Wall -Wextra -Wpedantic -Wshadow
 CLIBS=
 LINK_TARGET = test
 
-OBJS = Maval.o test.o
+VERBOSE=1
+
+OBJS = Maval.o Token.o test.o
 
 REBUILDABLES = $(OBJS) $(LINK_TARGET)
 
@@ -21,5 +23,6 @@ $(LINK_TARGET) : $(OBJS)
 %.o: %.cpp
 	g++ -g -o $@ -c $< $(CFLAGS) $(CLIBS)
 
-Maval.o : Maval.hpp
-test.o : Maval.hpp
+Maval.o : Maval.hpp Token.hpp
+test.o : Maval.hpp Token.hpp
+Token.o: Token.hpp
