@@ -1,11 +1,9 @@
-CC=g++
-CFLAGS=-g -std=c++17 -Wall -Wextra -Wpedantic -Wshadow
+CXX:=g++
+CXXFLAGS:= -g -std=c++2a -Wall -Wextra -Wpedantic -Wshadow
 CLIBS=
-LINK_TARGET = test
+LINK_TARGET:=test
 
-VERBOSE=1
-
-OBJS = Maval.o Token.o test.o
+OBJS = test.o Token.o BinaryExpression.o Expression.o ExpressionTree.o Lexer.o Parser.o
 
 REBUILDABLES = $(OBJS) $(LINK_TARGET)
 
@@ -17,12 +15,16 @@ clean:
 	@echo Deleting $(REBUILDABLES)
 	@rm -f $(REBUILDABLES)
 
-$(LINK_TARGET) : $(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS) $(CLIBS)
+$(LINK_TARGET): $(OBJS)
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(CLIBS)
 
 %.o: %.cpp
-	g++ -g -o $@ -c $< $(CFLAGS) $(CLIBS)
+	$(CXX) -o $@ -c $< $(CXXFLAGS) $(CLIBS)
 
-Maval.o : Maval.hpp Token.hpp
-test.o : Maval.hpp Token.hpp
+BinaryExpression.o: BinaryExpression.hpp
+Expression.o: Expression.hpp
+ExpressionTree.o: ExpressionTree.hpp
+Lexer.o: Lexer.hpp
+Parser.o: Parser.hpp
 Token.o: Token.hpp
+test.o : BinaryExpression.hpp Expression.hpp ExpressionTree.hpp Lexer.hpp Parser.hpp Token.hpp
