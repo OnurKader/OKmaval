@@ -6,8 +6,13 @@
 
 std::ostream& operator<<(std::ostream& os, const OK::Token& token)
 {
-	os << '[' << OK::TokenTypeStrings[static_cast<uint8_t>(token.type())] << "]: '" << token.str()
-	   << '\'';
+	os << '[' << OK::TokenTypeStrings[static_cast<uint8_t>(token.type())] << "]: ";
+
+	if(token.type() == OK::TokenType::Integer)
+		os << token.asInt();
+	else if(token.type() == OK::TokenType::Double)
+		os << token.asDouble();
+
 	return os;
 }
 
@@ -26,12 +31,12 @@ int main()
 
 		while(true)
 		{
-			OK::Token tok = tokenizer.parseInt();
+			OK::Token tok = tokenizer.parseDouble();
 			if(tok.type() == OK::TokenType::Bad || tok.type() == OK::TokenType::EndOfFile)
 				break;
-			printf("Got Token with %ld\n", tok.asInt());
+			printf("Got Token with %lf\n", tok.asDouble());
 			std::cout << tok << std::endl;
-			if(tok.type() == OK::TokenType::Integer)
+			if(tok.type() == OK::TokenType::Double)
 				break;
 		}
 

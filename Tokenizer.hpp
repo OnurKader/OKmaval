@@ -139,6 +139,32 @@ class Tokenizer
 		return Token(TokenType::Bad, str().data() + position(), position(), nullptr);
 	}
 
+	Token parseDouble()
+	{
+		if(m_str.data() == nullptr || position() >= m_str.length())
+			return Token(TokenType::EndOfFile, nullptr, position(), nullptr);
+
+		size_t start = position();
+
+		if(((current() == '-' || current() == '.') &&
+			std::isdigit(current(1))))	  // Doesn't support -.234 yet
+			increment();
+
+		if(std::isdigit(current()))
+		{
+			while(std::isdigit(current()) || current() == '.')
+				increment();
+
+			size_t length = position() - start;
+			char* token_buffer = new char[length];
+			str().copy(token_buffer, length, start);
+			double value = std::atof(token_buffer);
+			return Token(TokenType::Double, token_buffer, start, value);
+		}
+
+		return Token(TokenType::Bad, str().data() + position(), position(), nullptr);
+	}
+
 	size_t index() const { return m_index; }
 	size_t position() const { return m_index; }
 
