@@ -9,6 +9,8 @@ REBUILDABLES = $(OBJS) $(LINK_TARGET)
 
 .PHONY: all clean test
 
+VERBOSE=1
+
 all: $(LINK_TARGET)
 
 clean:
@@ -19,7 +21,6 @@ $(LINK_TARGET): $(OBJS)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(CLIBS)
 
 %.o: %.cpp
-	@echo "\033[1;32m" Compiling '$<' "\033[m"
 	$(CXX) -o $@ -c $< $(CXXFLAGS) $(CLIBS)
 
 run: $(LINK_TARGET)
