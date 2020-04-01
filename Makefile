@@ -29,7 +29,7 @@ run: $(LINK_TARGET)
 BinaryExpression.o: BinaryExpression.hpp
 Expression.o: Expression.hpp
 ExpressionTree.o: ExpressionTree.hpp
-Lexer.o: Lexer.hpp
+Lexer.o: Lexer.hpp Tokenizer.hpp
 Parser.o: Parser.hpp
 Tokenizer.o: Tokenizer.hpp
 test.o : BinaryExpression.hpp Expression.hpp ExpressionTree.hpp Lexer.hpp Parser.hpp Tokenizer.hpp
