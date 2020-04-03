@@ -202,6 +202,34 @@ class Tokenizer
 		return Token(TokenType::Bad, str().data() + position(), position(), nullptr);
 	}
 
+	Token parseOperator()
+	{
+		if(m_str.data() == nullptr || position() >= m_str.length())
+			return Token(TokenType::EndOfFile, "", position(), nullptr);
+
+		size_t start = position();
+		char c = current();
+		increment();
+		switch(c)
+		{
+			case '+': return Token(TokenType::Addition, "+", start, nullptr);
+			case '-': return Token(TokenType::Subtraction, "-", start, nullptr);
+			case '*': return Token(TokenType::Multiplication, "*", start, nullptr);
+			case '/': return Token(TokenType::Division, "/", start, nullptr);
+			case '%': return Token(TokenType::Modulus, "%", start, nullptr);
+			case '(': return Token(TokenType::OpenParens, "(", start, nullptr);
+			case ')': return Token(TokenType::CloseParens, ")", start, nullptr);
+
+			// Add Support for && and other multi character operators
+			case '&': return Token(TokenType::BitwiseAND, "&", start, nullptr);
+			case '|': return Token(TokenType::BitwiseOR, "|", start, nullptr);
+			case '^': return Token(TokenType::BitwiseXOR, "^", start, nullptr);
+			default: break;
+		}
+
+		return Token(TokenType::Bad, str().data() + position(), position(), nullptr);
+	}
+
 	size_t index() const { return m_index; }
 	size_t position() const { return m_index; }
 
