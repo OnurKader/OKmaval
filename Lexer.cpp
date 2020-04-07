@@ -2,7 +2,13 @@
 
 namespace OK
 {
-static constexpr const TokenType operators[] = {TokenType::Addition, TokenType::Subtraction};
+static constexpr const TokenType operators[] = {TokenType::Addition,
+												TokenType::Subtraction,
+												TokenType::Multiplication,
+												TokenType::Division,
+												TokenType::Modulus,
+												TokenType::OpenParens,
+												TokenType::CloseParens};
 
 constexpr bool isOperator(TokenType type)
 {
